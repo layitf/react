@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const mockData = [
+        {
+          skillId: "skillId3",
+          skillname: "skillName3",
+          value: "value1",
+          describe: "describe1"
+        },
+        {
+          skillId: "skillId1",
+          skillname: "skillName1",
+          value: "value2",
+          describe: "describe2"
+        },
+        {
+          skillId: "skillId3",
+          skillname: "skillName3",
+          value: "value3",
+          describe: "describe1"
+        },
+        {
+          skillId: "skillId1",
+          skillname: "skillName1",
+          value: "value4",
+          describe: "describe4"
+        },
+        {
+          skillId: "skillId1",
+          skillname: "skillName1",
+          value: "value5",
+          describe: "describe5"
+        },
+        {
+          skillId: "skillId1",
+          skillname: "skillName1",
+          value: "value6",
+          describe: "describe6"
+        }
+      ];
+      function dealData(data) {
+        const result = [];
+
+        data.reduce((map, item) => {
+            const optionsItem = {
+              ...item,
+              label: `${item.describe}(${item.value})`,
+              value: item.value
+            };
+            const options = map.get(item.skillId);
+
+            if (options) {
+              options.push(optionsItem);
+            } else {
+              map.set(item.skillId, [optionsItem]);
+            }
+            return map;
+          }, new Map())
+          .forEach((value, key) => {
+            result.push({
+              label: key,
+              options: value
+            });
+          });
+        return result;
+      }
+     const res = dealData(mockData);
+     console.log(123,res);
+    </script>
+  </body>
+</html>
